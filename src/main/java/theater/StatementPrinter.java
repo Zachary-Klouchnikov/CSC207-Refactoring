@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class StatementPrinter {
     private Invoice invoice;
-    private static Map<String, Play> plays;
+    private Map<String, Play> plays;
 
     public StatementPrinter(Invoice invoice, Map<String, Play> plays) {
         this.setInvoice(invoice);
@@ -23,7 +23,7 @@ public class StatementPrinter {
      */
     public String statement() {
 
-        int totalAmount = getTotalAmount();
+        final int totalAmount = getTotalAmount();
 
         final StringBuilder result = new StringBuilder("Statement for " + getInvoice().getCustomer()
                 + System.lineSeparator());
@@ -68,11 +68,11 @@ public class StatementPrinter {
         return volumeCredits;
     }
 
-    private static Play getPlay(Performance performance) {
+    private Play getPlay(Performance performance) {
         return getPlays().get(performance.getPlayID());
     }
 
-    private static int getAmount(Performance performance) {
+    private int getAmount(Performance performance) {
         int result = 0;
         switch (getPlay(performance).getType()) {
             case "tragedy":
@@ -105,11 +105,11 @@ public class StatementPrinter {
         this.invoice = invoice;
     }
 
-    public static Map<String, Play> getPlays() {
+    public Map<String, Play> getPlays() {
         return plays;
     }
 
     public void setPlays(Map<String, Play> plays) {
-        StatementPrinter.plays = plays;
+        this.plays = plays;
     }
 }
